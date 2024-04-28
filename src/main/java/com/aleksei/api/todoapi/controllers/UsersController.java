@@ -5,14 +5,13 @@ import com.aleksei.api.todoapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
 @Tag(name = "Users Controller", description = "To-Do API")
 public class UsersController {
@@ -29,7 +28,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TodoUser> getUserById(Long id) {
+    public ResponseEntity<TodoUser> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUser(id));
     }
 

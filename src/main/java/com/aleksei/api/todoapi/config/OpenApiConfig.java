@@ -5,9 +5,9 @@ import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Rent Car API",
+                title = "To-Do API",
                 version = "1.0",
-                description = "API for Rent Car"
+                description = "API for planning and managing activities"
         )
 )
 public class OpenApiConfig {
