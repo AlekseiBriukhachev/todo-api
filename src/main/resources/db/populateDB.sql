@@ -1,7 +1,7 @@
-INSERT INTO todo_user (name, surname, email)
-VALUES ('John', 'Doe', 'John@email.com'),
-       ('Jane', 'Doe', 'jane@email.com'),
-       ('John', 'Smith', 'smith@email.com');
+INSERT INTO todo_user (name, email)
+VALUES ('John Doe', 'John@email.com'),
+       ('Jane Doe', 'jane@email.com'),
+       ('John Smith', 'smith@email.com');
 
 INSERT INTO activity (title, description, start_date, end_date, user_id)
 VALUES ('Activity 1', 'Description 1', '2021-01-01', '2021-01-02', 100009),

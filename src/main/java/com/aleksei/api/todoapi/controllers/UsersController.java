@@ -1,9 +1,10 @@
 package com.aleksei.api.todoapi.controllers;
 
+import com.aleksei.api.todoapi.dto.TodoUserDto;
 import com.aleksei.api.todoapi.entity.TodoUser;
 import com.aleksei.api.todoapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +15,13 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
 @Tag(name = "Users Controller", description = "To-Do API")
+@RequiredArgsConstructor
 public class UsersController {
     private final UserService userService;
 
-    @Autowired
-    public UsersController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping
-    public ResponseEntity<List<TodoUser>> getAllUsers() {
+    public ResponseEntity<List<TodoUserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 

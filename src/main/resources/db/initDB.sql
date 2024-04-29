@@ -1,13 +1,10 @@
 DROP TABLE IF EXISTS activity;
 DROP TABLE IF EXISTS todo_user;
 
-CREATE SEQUENCE global_seq START WITH 100000;
-
 CREATE TABLE todo_user
 (
-    id      INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    id      INTEGER PRIMARY KEY UNIQUE NOT NULL,
     name    VARCHAR(255) NOT NULL,
-    surname VARCHAR(255) NOT NULL,
     email   VARCHAR(255) NOT NULL
 );
 
@@ -15,7 +12,7 @@ CREATE UNIQUE INDEX user_email_uindex ON todo_user (email);
 
 CREATE TABLE activity
 (
-    id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    id          INTEGER PRIMARY KEY UNIQUE NOT NULL,
     title       VARCHAR(255) NOT NULL,
     description TEXT,
     start_date  TIMESTAMP,
