@@ -1,6 +1,6 @@
 package com.aleksei.api.todoapi.controllers;
 
-import com.aleksei.api.todoapi.dto.TodoUserDto;
+import com.aleksei.api.todoapi.dto.UserDto;
 import com.aleksei.api.todoapi.entity.TodoUser;
 import com.aleksei.api.todoapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +21,7 @@ public class UsersController {
 
 
     @GetMapping
-    public ResponseEntity<List<TodoUserDto>> getAllUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
