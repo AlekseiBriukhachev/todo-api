@@ -38,5 +38,10 @@ public class ActivityController {
         activityService.delete(activityId);
         return ResponseEntity.ok("Activity deleted");
     }
+
+    @PostMapping("/{id}/complete")
+    public ResponseEntity<ActivityDto> completeActivity(@PathVariable(name = "id") Long activityId) {
+        return ResponseEntity.ok(activityService.complete(activityId));
+    }
 }
 

@@ -62,4 +62,14 @@ public class ActivityService {
             activityRepository.deleteById(activityId);
         }
     }
+
+    @Transactional
+    public ActivityDto complete(Long activityId) {
+        var activity = activityRepository.findById(activityId).orElseThrow(RuntimeException::new);
+        if (activity != null && activity.getEndDate() == null) {
+            activity.setEndDate(new Date());
+            activityRepository.save(activity);
+        }
+        return activityMapper.toDto(activity);
+    }
 }
