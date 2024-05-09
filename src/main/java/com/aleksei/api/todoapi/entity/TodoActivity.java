@@ -45,4 +45,6 @@ public class TodoActivity {
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private TodoUser todoUser;
+
+    private Boolean isCompleted;
 }

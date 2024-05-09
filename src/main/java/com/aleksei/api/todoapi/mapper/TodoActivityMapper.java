@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {TodoUserMapper.class})
 public interface TodoActivityMapper {
 
+    @Mapping(target = "isCompleted", expression = "java(activity.getEndDate() != null)")
     ActivityDto toDto(TodoActivity activity);
 
     @Mapping(target = "todoUser", ignore = true)

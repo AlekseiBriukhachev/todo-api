@@ -30,4 +30,7 @@ public class ActivityDto {
     @Schema(description = "Activity end date", example = "2024-04-30")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date endDate;
+
+    @Schema(description = "Activity status", example = "true")
+    private Boolean isCompleted;
 }

@@ -1,7 +1,6 @@
 package com.aleksei.api.todoapi.controllers;
 
 import com.aleksei.api.todoapi.dto.UserDto;
-import com.aleksei.api.todoapi.entity.TodoUser;
 import com.aleksei.api.todoapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TodoUser> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUser(id));
     }
 

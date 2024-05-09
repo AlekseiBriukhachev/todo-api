@@ -1,7 +1,6 @@
 package com.aleksei.api.todoapi.service;
 
 import com.aleksei.api.todoapi.dto.UserDto;
-import com.aleksei.api.todoapi.entity.TodoUser;
 import com.aleksei.api.todoapi.mapper.TodoActivityMapper;
 import com.aleksei.api.todoapi.mapper.TodoUserMapper;
 import com.aleksei.api.todoapi.repository.UserRepository;
@@ -26,7 +25,8 @@ public class UserService {
                 .toList();
     }
 
-    public TodoUser getUser(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDto getUser(Long id) {
+        var user = userRepository.findById(id).orElse(null);
+        return todoUserMapper.toDto(user);
     }
 }

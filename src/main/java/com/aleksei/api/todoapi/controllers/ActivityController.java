@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class ActivityController {
     private final ActivityService activityService;
 
-    @PostMapping("/create")
-    public ResponseEntity<ActivityDto> createActivity(@RequestBody ActivityDto activityDto) {
-        return ResponseEntity.ok(activityService.createActivity(activityDto));
+    @PostMapping("/{id}/create")
+    public ResponseEntity<ActivityDto> createAndAssignActivity(@PathVariable(name = "id") Long userId,
+                                                               @RequestBody ActivityDto activityDto) {
+        return ResponseEntity.ok(activityService.createAndAssignActivity(userId, activityDto));
     }
 
     @PostMapping("/{id}/assign")

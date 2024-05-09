@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ActivityService {
     private final ActivityRepository activityRepository;
@@ -71,5 +71,11 @@ public class ActivityService {
             activityRepository.save(activity);
         }
         return activityMapper.toDto(activity);
+    }
+
+    @Transactional
+    public ActivityDto createAndAssignActivity(Long userId, ActivityDto activityDto) {
+        var activity = createActivity(activityDto);
+        return assign(activity.getId(), userId);
     }
 }
