@@ -6,11 +6,12 @@ import com.aleksei.api.todoapi.mapper.TodoActivityMapper;
 import com.aleksei.api.todoapi.repository.ActivityRepository;
 import com.aleksei.api.todoapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
+import java.time.LocalDate;
+import java.sql.Date;
 @Service
 //@Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class ActivityService {
         var activity = new TodoActivity();
         activity.setTitle(activityDto.getTitle());
         activity.setDescription(activityDto.getDescription());
-        activity.setStartDate(new Date());
+        activity.setStartDate(Date.valueOf(LocalDate.now()));
         activityRepository.save(activity);
         return activityMapper.toDto(activity);
     }
@@ -63,11 +64,13 @@ public class ActivityService {
         }
     }
 
+    @SneakyThrows
     @Transactional
     public ActivityDto complete(Long activityId) {
         var activity = activityRepository.findById(activityId).orElseThrow(RuntimeException::new);
+
         if (activity != null && activity.getEndDate() == null) {
-            activity.setEndDate(new Date());
+            activity.setEndDate(Date.valueOf(LocalDate.now()));
             activityRepository.save(activity);
         }
         return activityMapper.toDto(activity);

@@ -4,10 +4,11 @@ import com.aleksei.api.todoapi.dto.ActivityDto;
 import com.aleksei.api.todoapi.service.ActivityService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@Slf4j
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/activity")
@@ -31,7 +32,9 @@ public class ActivityController {
     @PostMapping("/{id}/update")
     public ResponseEntity<ActivityDto> updateActivity(@PathVariable(name = "id") Long activityId,
                                                       @RequestBody ActivityDto activityDto) {
-        return ResponseEntity.ok(activityService.update(activityId, activityDto));
+        var updatedActivity = activityService.update(activityId, activityDto);
+        log.debug("Updated activity: {}", updatedActivity);
+        return ResponseEntity.ok(updatedActivity);
     }
 
     @DeleteMapping("/{id}/delete")
@@ -42,7 +45,14 @@ public class ActivityController {
 
     @PostMapping("/{id}/complete")
     public ResponseEntity<ActivityDto> completeActivity(@PathVariable(name = "id") Long activityId) {
-        return ResponseEntity.ok(activityService.complete(activityId));
+        ActivityDto completedActivity = null;
+        try {
+            completedActivity = activityService.complete(activityId);
+            log.debug("Completed activity: {}", completedActivity);
+            return ResponseEntity.ok(completedActivity);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(completedActivity);
+        }
     }
 }
 
